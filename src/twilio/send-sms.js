@@ -1,19 +1,17 @@
 const config = require('../config')
 const client = require('twilio')(config.accountSID, config.authToken)
 
-async function sendMessage () {
+const sendMessage = async (body, phone) => {
     try {
         const message = await client.messages.create({
-            to: config.phone,
+            to: phone,
             from: '+13344630202',
-            body: 'hola que hace'
+            body
         })
-        console.log(message.sid);
+        return message
     } catch (error) {
         console.log(error);
-        
     }
-    
 }
 
-sendMessage()
+module.exports = { sendMessage }

@@ -1,8 +1,12 @@
 const { Router } = require('express')
 const router = Router()
 
-router.get('/', (req, res) => {
-    res.render('index')
-})
+const { indexController, postMessage, receiveMessage } = require('../controllers/index.controller')
+
+router.get('/', indexController)
+
+router.post('/send-sms', postMessage)
+
+router.post('/sms', receiveMessage)
 
 module.exports = router
